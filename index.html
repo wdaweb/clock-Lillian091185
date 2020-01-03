@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>clock</title>
+    <style>
+
+        body{
+            background: black;
+            position: relative;
+        }
+
+        #clock {
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 99;
+            top: 120px;
+            left: 500px;
+            background-image:url(./img/88.svg);
+            background-size:cover;
+            background-repeat: no-repeat;
+            background-position: -6px -155px;
+        }
+
+        #hour {
+            position: absolute;
+            width: 17%;
+            left: 33%;
+            height: 6px;
+            background:white;
+            top: calc(50% - 3px);
+            transform: rotate(30deg);
+            transform-origin: right center;
+            border-radius: 50%;
+        }
+
+        #minute {
+            position: absolute;
+            width: 28%;
+            left: 22%;
+            height: 6px;
+            background:white;
+            top: calc(50% - 3px);
+            transform: rotate(46deg);
+            transform-origin: right center;
+            border-radius: 50%;
+        }
+
+        #second {
+            position: absolute;
+            width: 33%;
+            left: 17%;
+            height: 6px;
+            background: white;
+            top: calc(50% - 3px);
+            transform: rotate(90deg);
+            transform-origin: right center;
+            border-radius: 50%;
+        }
+
+        p {
+            color: rgb(255, 255, 255);
+            font-weight:bold;
+            font-size:1.5em;
+            font-family: '微軟正黑體', sans-serif;
+            position: absolute;
+            left:850px;
+            top:500px;
+            text-shadow: 0 3px 2px red;
+        }
+
+        .bg {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bg>div {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            position: fixed;
+            animation: bg 25s infinite;
+            opacity: 0;
+        }
+
+        .bg>div:nth-child(2) {
+            animation-delay: 5s;
+        }
+
+        .bg>div:nth-child(3) {
+            animation-delay: 10s;
+        }
+
+        .bg>div:nth-child(4) {
+            animation-delay: 15s;
+        }
+
+        .bg>div:nth-child(5) {
+            animation-delay: 20s;
+        }
+
+        @keyframes bg {
+            10% {
+                opacity: 1;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            30% {
+                opacity: 0;
+            }
+
+            40% {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="bg">
+        <div style="background-image:url(./img/9.jpg)"></div>
+        <div style="background-image:url(./img/6.jpg)"></div>
+        <div style="background-image:url(./img/4.jpg)"></div>
+        <div style="background-image:url(./img/2.jpg)"></div>
+        <div style="background-image:url(./img/1.jpg)"></div>
+    </div>
+    <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+    </div>
+    <P><span id="time"></span></P>
+
+    <script>
+        let hour = document.getElementById("hour");
+        let minute = document.getElementById("minute");
+        let second = document.getElementById("second");
+
+        let clock = () => {
+            let date = new Date();
+            let h = date.getHours();
+            let m = date.getMinutes();
+            let s = date.getSeconds();
+            hour.style.transform = `rotate( ${h*30+90}deg)`;
+            minute.style.transform = `rotate( ${m*6+90}deg)`;
+            second.style.transform = `rotate( ${s*6+90}deg)`;
+
+            let y = date.getFullYear();
+            let mon = date.getMonth() + 1;
+            let d = date.getDate();
+            // time.innerText = y+"年"+mon+"月"+d+"日"+h+"點"+m+"分"+s+"秒";
+            time.innerText = date.toLocaleString("zh-tw");
+        }
+        clock();
+        setInterval(clock, 1000);
+    </script>
+</body>
+
+</html>
